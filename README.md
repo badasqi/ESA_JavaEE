@@ -1,6 +1,6 @@
 # ESA_JavaEE
-Glassfish 6.0.25
-MySQL-connector 8.0.29
+В качестве сервера приложений был использован Glassfish 6.0.25
+БД - MySQL
 
 ## Data Layer
 Были созданы 2 сущности (Client, Provider).
