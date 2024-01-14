@@ -1,21 +1,20 @@
 package Entity;
 
-
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity(name = "client")
 @NamedQuery(name = "Client.getAll", query = "SELECT e from client e")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idclient")
-    private long id;
+    private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "address")
+    private String address;
 
     @Column(name = "contact")
     private String contact;
@@ -23,7 +22,7 @@ public class Client {
     @Column(name = "tariff")
     private String tariff;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idprovider")
     private Provider provider;
 
@@ -45,7 +44,9 @@ public class Client {
     public String getTariff(){
         return this.tariff;
     }
-    public String getProvider() {return this.provider.getName();}
+    public String getProvider() {return provider.getName();}
+    public String getAddress() {return this.address;}
+
 
     public void setName(String name){
         this.name = name;
@@ -57,8 +58,13 @@ public class Client {
         this.contact = contact;
     }
     public void setProvider(Provider provider){ this.provider= provider;}
+    public void setAddress(String address) {this.address = address;}
 
     public String getProviderName() {
         return provider.getName();
+    }
+
+    public int getProviderId() {
+        return provider.getId();
     }
 }

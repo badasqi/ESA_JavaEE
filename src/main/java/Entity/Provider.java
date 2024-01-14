@@ -11,7 +11,7 @@ import java.util.List;
 @NamedQuery(name = "Provider.getAll", query = "SELECT e from Provider e")
 public class Provider{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idprovider")
     private int id;
 

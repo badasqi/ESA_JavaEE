@@ -36,20 +36,14 @@ public class ClientListServlet extends HttpServlet {
         doGet(request, response);
     }
 
-    //protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-     //   ObjectMapper mapper = new ObjectMapper();
-    //    Client client = mapper.readValue(request.getInputStream(), Client.class);
-     //   addClientAndRefreshPage(request, response, client);
-   // }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ObjectMapper mapper = new ObjectMapper();
         Client client = mapper.readValue(request.getInputStream(), Client.class);
 
         // Получение имени провайдера из JSON
-        String providerName = client.getProviderName();
+        int providerId = client.getProviderId();
         // Извлечение провайдера из базы данных по имени
-        Provider foundProvider = providerBean.getProviderByName(providerName);
+        Provider foundProvider = providerBean.getProviderById(providerId);
         client.setProvider(foundProvider);
         // Добавляем клиента в базу данных
         addClientAndRefreshPage(request, response, client);

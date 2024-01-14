@@ -8,17 +8,15 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.logging.Logger; // Импортируем класс Logger
+import java.util.logging.Logger;
 
 @Stateless
 public class ProviderBean {
-
 
     @PersistenceContext(unitName = "default")
     private EntityManager entityManager;
 
 
-    // Получаем экземпляр Logger для текущего класса
     private static final Logger logger = Logger.getLogger(ProviderBean.class.getName());
 
 
@@ -50,6 +48,22 @@ public class ProviderBean {
             throw new EJBException("Ошибка при поиске провайдера по имени", e);
         }
     }
+
+    public Provider getProviderById(Integer id) {
+        try {
+            TypedQuery<Provider> query = entityManager.createQuery("SELECT p FROM Provider p WHERE p.id = :id", Provider.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            // Если не найден провайдер с указанным id, возвращаем null или обрабатываем по вашему усмотрению
+            return null;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Ошибка при поиске провайдера по id: " + e.getMessage(), e);
+            throw new EJBException("Ошибка при поиске провайдера по id", e);
+        }
+    }
+
+
 
     public Provider updateProvider(Provider provider) {
         try {

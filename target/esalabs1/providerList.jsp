@@ -28,7 +28,6 @@
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <!-- Если у провайдера нет клиентов -->
                         No clients
                     </c:otherwise>
                 </c:choose>

@@ -7,7 +7,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
-import java.util.logging.Logger; // Импортируем класс Logger
+import java.util.logging.Logger;
 
 @Stateless
 public class ClientBean {
@@ -15,8 +15,6 @@ public class ClientBean {
     @PersistenceContext(unitName = "default")
     private EntityManager entityManager;
 
-
-    // Получаем экземпляр Logger для текущего класса
     private static final Logger logger = Logger.getLogger(ProviderBean.class.getName());
 
 
@@ -46,7 +44,7 @@ public class ClientBean {
         return updatedClient;
     }
 
-    public void deleteClient(long clientId) {
+    public void deleteClient(Integer clientId) {
         try {
             Client client = entityManager.find(Client.class, clientId);
             if (client != null) {
@@ -60,6 +58,4 @@ public class ClientBean {
             throw new EJBException("Ошибка при удалении клиента", e);
         }
     }
-
-    // Другие методы для работы с сущностью Provider
 }
