@@ -1,0 +1,5 @@
+Bean\ClientBean.class
+Servlets\ProviderListServlet.class
+Servlets\HelloServlet.class
+Bean\ProviderBean.class
+Entity\Provider.class
